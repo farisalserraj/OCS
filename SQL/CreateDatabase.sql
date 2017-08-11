@@ -104,10 +104,13 @@ CREATE TABLE ocs.ConsultationRequest
   PatientDOBHash VARCHAR(80) NOT NULL,
   RequestersName VARCHAR(80) NOT NULL,
   RequestersNumber VARCHAR(11) NOT NULL,
+  SubmittedDateTime DATETIME2 NOT NULL
+    CONSTRAINT D_ConsultationRrequest_SubmittedDateTime DEFAULT(GETDATE()),
+  CompletedDateTime DATETIME2 NULL
 );
 CREATE NONCLUSTERED INDEX IDX_ConsultationRequest
   ON ocs.ConsultationRequest (Id ASC)
-    INCLUDE (LocationId,PriorityId,RequestersName);
+    INCLUDE (LocationId,PriorityId,RequestersName,SubmittedDateTime,CompletedDateTime);
 GO
 
 CREATE TABLE ocs.AuditLog
